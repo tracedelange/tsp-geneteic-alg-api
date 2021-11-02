@@ -2,9 +2,11 @@ import flask
 from flask import request, jsonify, Flask
 from os import environ
 import random
+import generateProblem
+from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
-
+CORS(app)
 
 
 @app.route('/', methods=['GET'])
@@ -28,8 +30,11 @@ def home():
     
     """
 @app.route('/generate', methods=['GET'])
-def generate(count):
-    return jsonify(count)
+def generate():
+
+    response = generateProblem.generate_cities(10)
+
+    return jsonify(response)
 
 if __name__ == "__main__":
     app.run(debug=True)
