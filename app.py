@@ -31,8 +31,9 @@ def home():
     """
 @app.route('/generate', methods=['GET'])
 def generate():
+    cities = request.args.get('city_count')
 
-    response = generateProblem.generate_cities(10)
+    response = generateProblem.generate_cities(int(cities))
 
     return jsonify(response)
 
